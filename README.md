@@ -1,2 +1,11 @@
-# proyecto-automatizacion
-Automatización para el cuidado de plantas
+# proyecto-riego
+
+## Grupo 4
+
+**Integrantes:**
+
+- Cardenas Sebastian
+- Fonseca Rafael
+- Garcia Luis
+- Tinoco Jeimmy
+- Zurita Dilan
