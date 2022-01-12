@@ -114,4 +114,5 @@ while True:
 
   tierra, agua, estacion = riego.lectura_sensor()
   riego.control_riego(tierra, agua, estacion)
+  riego.control_riego(tierra, agua, estacion)
   time.sleep(15)
