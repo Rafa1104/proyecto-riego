@@ -13,11 +13,7 @@ GPIO.setup(28, GPIO.IN) # Estacion
 GPIO.setup(32, GPIO.OUT) #Bomba
 
 
-
 Class Riego:
-  #sensor_tierra
-  #sensor_agua
-  #regar
   
   def lectura_sensor(self):
     
