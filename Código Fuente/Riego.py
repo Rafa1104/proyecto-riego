@@ -3,14 +3,19 @@ import time
 
 GPIO.setmode(GPIO.BOARD)
 
-GPIO.setup(8, GPIO.IN)  # Dias (incrementa los dias, si llega a 3 se hace el riego)
+GPIO.setup(8, GPIO.IN) # Dias (incrementa los dias, si llega a 3 se activa) 
 GPIO.setup(24, GPIO.IN) # Tierra
 GPIO.setup(26, GPIO.IN) # Reserva
 GPIO.setup(28, GPIO.IN) # Estacion
-#GPIO.setup(8, GPIO.IN) # Dias
  
 GPIO.setup(32, GPIO.OUT) #Bomba
 
+# 1: Seca
+# 2: Humeda
+# 3: Dias = 3
+# 4: Dias < 3
+# 5: Con agua
+# 6: Sin agua
 
 Class Riego:
   
@@ -28,4 +33,10 @@ Class Riego:
     else:
       agua = 0
     
-    return(tierra, agua)
+    # Estacion de año: verano = 1, invierno = 0
+    if GPiO.input(28) == 1:
+      estacion = 1
+    else:
+      estacion =0
+    
+    return(tierra, agua, estacion)
