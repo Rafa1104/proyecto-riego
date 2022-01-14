@@ -40,7 +40,7 @@ class Riego:
         return(tierra, agua, estacion)
 
 
-def control_riego(self, tierra, agua, estacion):
+  def control_riego(self, tierra, agua, estacion):
         # s = tierra
         # r = estacion
         # d = dia noche

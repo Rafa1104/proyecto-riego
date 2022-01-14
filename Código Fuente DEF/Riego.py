@@ -9,21 +9,13 @@ GPIO.setup(26, GPIO.IN)  # Reserva
 GPIO.setup(28, GPIO.IN)  # Estacion
 
 GPIO.setup(32, GPIO.OUT)  # Bomba
-# Tierra pin 24
+
 # 1: Seca
 # 2: Humeda
-
-# Dias pin 8
 # 3: Dias = 3
 # 4: Dias < 3
-
-# Dias pin 26
 # 5: Con agua
 # 6: Sin agua
-
-# estacion veranp=invierno
-# 7: Verano
-# 8: Invierno
 
 class Riego:
   def lectura_sensor(self):
@@ -49,47 +41,74 @@ class Riego:
 
 
   def control_riego(self, tierra, agua, estacion):
+        # s = tierra
+        # r = estacion
+        # d = dia noche
+        # v = agua
+        # 5: Con agua
+        # 6: Sin agua
 
         if tierra == 1:
             if estacion == 1:
                 if agua == 0:
+                    print("\n")
+                    print("Activando Bomba...")
                     GPIO.output(32, GPIO.HIGH)
-                    print("\nBOMBA ACTIVADA\n")
-
+                    print("BOMBA ACTIVADA")
+                    print("\n" + "***************************")
+                    print("\n")
                 else:
                     GPIO.output(32, GPIO.LOW)
+                    print("\n")
+                    print("-LA BOMBA NO PUEDE TRABAJAR SI EL DEPOSITO ESTA VACIO-")
+
             else:
 
                 if agua == 1:
+                    print("\n")
+                    print("-LA BOMBA NO PUEDE TRABAJAR SI EL DEPOSITO ESTA VACIO-")
                     print("\n" + "BOMBA DESACTIVADA")
                     GPIO.output(32, GPIO.LOW)
+                    print("\n" + "***************************")
+                    print("\n")
+
                 else:
                     if agua == 0:  # lleno
-
+                        print("\n")
+                        print("Activando Bomba...")
                         GPIO.output(32, GPIO.HIGH)
-                        print("\nBOMBA ACTIVADA")
+                        print("BOMBA ACTIVADA")
+                        print("\n" + "***************************")
+                        print("\n")
 
                     else:
+                        print("\n")
+                        print("-LA BOMBA NO PUEDE TRABAJAR SI EL DEPOSITO ESTA VACIO-")
                         print("\n" + "BOMBA DESACTIVADA")
                         GPIO.output(32, GPIO.LOW)
-
+                        print("\n" + "***************************")
+                        print("\n")
 
         else:
+            print("\n" + "-NO NECESITA RIEGO-")
             if estacion == 1:
                 if agua == 1:
+                    print("-LA BOMBA NO PUEDE TRABAJAR SI EL DEPOSITO ESTA VACIO-")
+
             else:
                 if agua == 1:
+                    print("-LA BOMBA NO PUEDE TRABAJAR SI EL DEPOSITO ESTA VACIO-")
             print("\n" + "BOMBA DESACTIVADA")
             GPIO.output(32, GPIO.LOW)
+            print("\n" + "***************************")
+            print("\n")
 
 
 
-
-Riego = Riego()
+riego = Riego()
 
 while True:
 
-  tierra, agua, estacion = Riego.lectura_sensor()
-  Riego.control_riego(tierra, agua, estacion)
-  Riego.control_riego(tierra, agua, estacion)
+  tierra, agua, estacion = riego.lectura_sensor()
+  riego.control_riego(tierra, agua, estacion)
   time.sleep(15)
