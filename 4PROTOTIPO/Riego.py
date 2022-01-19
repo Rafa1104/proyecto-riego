@@ -42,7 +42,7 @@ class Riego:
         return(tierra, agua, estacion)
 
 
-  def control_riego(self, tierra, agua, estacion):
+  def control_riego(self, tierra, dias, agua, estacion):
 
         # s = tierra
         # r = estacion
@@ -50,6 +50,13 @@ class Riego:
         # v = agua
 
         estado = ""
+
+        if dias == 3:
+          GPIO.output(32, GPIO.HIGH)
+          print("- Dia 3, la bomba siempre se activa")
+          estado = "BOMBA ACTIVADA"
+          print("\n" + "***************************")
+          print("\n")
 
         if tierra == 1:
             if estacion == 1:
@@ -112,9 +119,13 @@ class Riego:
 
 
 riego = Riego()
+dias = 0
 
 while True:
+  dias +=1
+  if dias == 3:
+    dias = 0
 
   tierra, agua, estacion = riego.lectura_sensor()
-  riego.control_riego(tierra, agua, estacion)
+  riego.control_riego(tierra, dias, agua, estacion)
   time.sleep(15)
