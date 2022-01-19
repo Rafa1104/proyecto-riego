@@ -16,6 +16,8 @@ GPIO.setup(32, GPIO.OUT)  # Bomba
 # 4: Dias < 3
 # 5: Con agua
 # 6: Sin agua
+# 7: Verano
+# 8: Invierno
 
 class Riego:
   def lectura_sensor(self):
@@ -46,8 +48,6 @@ class Riego:
         # r = estacion
         # d = dia noche
         # v = agua
-        # 5: Con agua
-        # 6: Sin agua
 
         estado = ""
 
