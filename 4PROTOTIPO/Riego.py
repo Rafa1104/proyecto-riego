@@ -41,6 +41,7 @@ class Riego:
 
 
   def control_riego(self, tierra, agua, estacion):
+
         # s = tierra
         # r = estacion
         # d = dia noche
@@ -48,13 +49,15 @@ class Riego:
         # 5: Con agua
         # 6: Sin agua
 
+        estado = ""
+
         if tierra == 1:
             if estacion == 1:
                 if agua == 0:
                     print("\n")
                     print("Activando Bomba...")
                     GPIO.output(32, GPIO.HIGH)
-                    print("BOMBA ACTIVADA")
+                    estado = "BOMBA ACTIVADA"
                     print("\n" + "***************************")
                     print("\n")
                 else:
@@ -67,7 +70,7 @@ class Riego:
                 if agua == 1:
                     print("\n")
                     print("-LA BOMBA NO PUEDE TRABAJAR SI EL DEPOSITO ESTA VACIO-")
-                    print("\n" + "BOMBA DESACTIVADA")
+                    estado = "BOMBA DESACTIVADA"
                     GPIO.output(32, GPIO.LOW)
                     print("\n" + "***************************")
                     print("\n")
@@ -77,14 +80,14 @@ class Riego:
                         print("\n")
                         print("Activando Bomba...")
                         GPIO.output(32, GPIO.HIGH)
-                        print("BOMBA ACTIVADA")
+                        estado = "BOMBA ACTIVADA"
                         print("\n" + "***************************")
                         print("\n")
 
                     else:
                         print("\n")
                         print("-LA BOMBA NO PUEDE TRABAJAR SI EL DEPOSITO ESTA VACIO-")
-                        print("\n" + "BOMBA DESACTIVADA")
+                        estado = "BOMBA DESACTIVADA"
                         GPIO.output(32, GPIO.LOW)
                         print("\n" + "***************************")
                         print("\n")
@@ -98,10 +101,13 @@ class Riego:
             else:
                 if agua == 1:
                     print("-LA BOMBA NO PUEDE TRABAJAR SI EL DEPOSITO ESTA VACIO-")
-            print("\n" + "BOMBA DESACTIVADA")
+            estado = "BOMBA DESACTIVADA"
             GPIO.output(32, GPIO.LOW)
             print("\n" + "***************************")
             print("\n")
+
+        return(estado)
+
 
 
 
