@@ -1,5 +1,6 @@
 #import RPi.GPIO as GPIO
 import time
+from datetime import date, datetime
 import os
 
 ##GPIO.setmode(GPIO.BOARD)
@@ -51,8 +52,9 @@ class Riego:
   def lectura_sensor(self):
     
       tierra = 1    # Sensor de Tierra: Tierra seca 1 - Tierra humeda = 0
-      agua = 1      # Sensor de la Reserva: Reserva llena 0 - Reserva vacia = 1
-      estacion = 0  # Estacion de año: verano = 1, invierno = 0
+      estacion = 1  # Estacion de año: verano = 1, invierno = 0
+      agua = 0      # Sensor de la Reserva: Reserva llena 0 - Reserva vacia = 1
+
       return(tierra, agua, estacion)
 
   def control_riego(self, tierra, dias, agua, estacion):
@@ -61,8 +63,12 @@ class Riego:
         # r = estacion
         # d = dia noche
         # v = agua
+        
+        fechaActual = datetime.now()
+        fechaActualFormato = datetime.strftime(fechaActual, '%d/%m/%Y %H:%M:%S')
 
         estado = ""
+        
         if tierra == 1: # seca
             if estacion == 1: # Verano
                 if agua == 0: # lleno
@@ -118,21 +124,23 @@ class Riego:
                   #GPIO.output(32, GPIO.LOW)
                   estado = "BOMBA DESACTIVADA"
 
-        return(estado)
+        return(fechaActualFormato, estado)
 
 
 
 
 riego = Riego()
+
+
 dias = 0
 
-##for i in range(2):
-##  dias +=1
+##for i in range(3): dias +=1
 ##
 ##  print("Dia: ", dias)
 ##  print("***************************************")
 ##  tierra, agua, estacion = riego.lectura_sensor()
-##  print("\n", riego.control_riego(tierra, dias, agua, estacion), "\n")
+##  fechaActualFormato, estado = riego.control_riego(tierra, dias, agua, estacion)
+##  print("\n", fechaActualFormato, "\n", estado , "\n")
 ##  print("***************************************\n")
 ##  if dias == 3:
 ##    dias = 0
