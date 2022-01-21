@@ -26,12 +26,13 @@ class TestRiego(unittest.TestCase):
         estacion = 0    # 8: Invierno
 
         print("Dia: ", dias)
-        print("***************************************\n")
-        estado = riego.control_riego(self, tierra, dias, agua, estacion)
-        print("\n", estado, "\n")
+        print("***************************************")
+        fechaActualFormato, estado = riego.control_riego(self, tierra, dias, agua, estacion)
+        print("\n", fechaActualFormato, "\n", estado, "\n")
         print("***************************************\n")
         
         self.assertEqual(estado, "BOMBA ACTIVADA")
+        self.assertTrue(fechaActualFormato)
 
     def test_caso_2 (self):
         estado =""
@@ -42,12 +43,13 @@ class TestRiego(unittest.TestCase):
         estacion = 1    # 7: Verano
 
         print("Dia: ", dias)
-        print("***************************************\n")
-        estado = riego.control_riego(self, tierra, dias, agua, estacion)
-        print("\n", estado, "\n")
+        print("***************************************")
+        fechaActualFormato, estado = riego.control_riego(self, tierra, dias, agua, estacion)
+        print("\n", fechaActualFormato, "\n", estado, "\n")
         print("***************************************\n")
         
         self.assertEqual(estado, "BOMBA ACTIVADA")
+        self.assertTrue(fechaActualFormato)
         
     def test_caso_3 (self):
         estado =""
@@ -58,12 +60,13 @@ class TestRiego(unittest.TestCase):
         estacion = 0    # 8: Invierno
 
         print("Dia: ", dias)
-        print("***************************************\n")
-        estado = riego.control_riego(self, tierra, dias, agua, estacion)
-        print("\n", estado, "\n")
+        print("***************************************")
+        fechaActualFormato, estado = riego.control_riego(self, tierra, dias, agua, estacion)
+        print("\n", fechaActualFormato, "\n", estado, "\n")
         print("***************************************\n")
         
         self.assertEqual(estado, "BOMBA ACTIVADA")
+        self.assertTrue(fechaActualFormato)
 
     def test_caso_4 (self):
         estado =""
@@ -74,12 +77,13 @@ class TestRiego(unittest.TestCase):
         estacion = 0    # 8: Invierno
         
         print("Dia: ", dias)
-        print("***************************************\n")
-        estado = riego.control_riego(self, tierra, dias, agua, estacion)
-        print("\n", estado, "\n")
+        print("***************************************")
+        fechaActualFormato, estado = riego.control_riego(self, tierra, dias, agua, estacion)
+        print("\n", fechaActualFormato, "\n", estado, "\n")
         print("***************************************\n")
         
         self.assertEqual(estado, "BOMBA DESACTIVADA")
+        self.assertTrue(fechaActualFormato)
 
     def test_caso_5 (self):
         estado =""
@@ -91,12 +95,13 @@ class TestRiego(unittest.TestCase):
         
         
         print("Dia: ", dias)
-        print("***************************************\n")
-        estado = riego.control_riego(self, tierra, dias, agua, estacion)
-        print("\n", estado, "\n")
+        print("***************************************")
+        fechaActualFormato, estado = riego.control_riego(self, tierra, dias, agua, estacion)
+        print("\n", fechaActualFormato, "\n", estado, "\n")
         print("***************************************\n")
         
         self.assertEqual(estado, "BOMBA ACTIVADA")
+        self.assertTrue(fechaActualFormato)
         
     def test_caso_6 (self):
         estado =""
@@ -107,9 +112,9 @@ class TestRiego(unittest.TestCase):
         estacion = 0    # 8: Invierno
         
         print("Dia: ", dias)
-        print("***************************************\n")
-        estado = riego.control_riego(self, tierra, dias, agua, estacion)
-        print("\n", estado, "\n")
+        print("***************************************")
+        fechaActualFormato, estado = riego.control_riego(self, tierra, dias, agua, estacion)
+        print("\n", fechaActualFormato, "\n", estado, "\n")
         print("***************************************\n")
         self.assertEqual(estado, "BOMBA DESACTIVADA")
         
