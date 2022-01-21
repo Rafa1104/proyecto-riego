@@ -15,18 +15,21 @@ from riego_noPi import Riego as riego
 # Reserva llena 0 - Reserva vacia = 1
 # verano = 1, invierno = 0
 
-##  print("Dia: ", dias)
-##  print("***************************************")
-##  print("\n", riego.control_riego(tierra, dias, agua, estacion), "\n")
-##  print("***************************************\n")
-
 class TestRiego(unittest.TestCase):
 
     def test_caso_1 (self):
         estado = ""
-                #riego.control_riego(self, tierra, dias, agua, estacion)
-                # 1 - 4 - 5 - 8 dias:1
-        estado = riego.control_riego(self, 1, 1, 0, 0)
+                        #    CASOS
+        tierra = 1      # 1: Seca
+        dias = 1        # 4: Dias < 3 -> Dias:1
+        agua = 0        # 5: Con agua
+        estacion = 0    # 8: Invierno
+        
+        estado = riego.control_riego(self, tierra, dias, agua, estacion)
+        print("Dia: ", dias)
+        print("***************************************")
+        print("\n", estado, "\n")
+        print("***************************************\n")
         self.assertEqual(estado, "BOMBA ACTIVADA")
 
     def test_caso_2 (self):
