@@ -1,0 +1,13 @@
+Primer caso: Solo activar bomba
+
+Segundo caso: Verificar si la bomba tiene agua (pones el caso 6 ese es el que tiene) 
+
+Tercer Caso: Crear una variable llamada proximo, que cuando esté en uno indique que está proximo a acabarse, cuando esté en 0 aun tiene suficiente.
+
+Cuarto Caso: Ahi si pones el caso donde se indica la fecha y hora y un mensajito que diga "bomba accionada el 21/01/2022" 
+
+Quinto Caso: Comprueba el estado actual de la tierra (entran el 2 y el 4) 
+
+Sexto Caso: Saber a que hora es mas adecuado regar para eso comprobamos las estaciones invierno verano
+
+Septimo Caso: Si los test son correctos mensaje de notificacion enviada al usuario
