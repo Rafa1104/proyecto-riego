@@ -26,7 +26,7 @@ class TestRiego(unittest.TestCase):
         estacion = 0    # 8: Invierno
 
         print("Dia: ", dias)
-        print("***************************************")
+        print("***************************************\n")
         estado = riego.control_riego(self, tierra, dias, agua, estacion)
         print("\n", estado, "\n")
         print("***************************************\n")
@@ -42,7 +42,7 @@ class TestRiego(unittest.TestCase):
         estacion = 1    # 7: Verano
 
         print("Dia: ", dias)
-        print("***************************************")
+        print("***************************************\n")
         estado = riego.control_riego(self, tierra, dias, agua, estacion)
         print("\n", estado, "\n")
         print("***************************************\n")
@@ -58,7 +58,7 @@ class TestRiego(unittest.TestCase):
         estacion = 0    # 8: Invierno
 
         print("Dia: ", dias)
-        print("***************************************")
+        print("***************************************\n")
         estado = riego.control_riego(self, tierra, dias, agua, estacion)
         print("\n", estado, "\n")
         print("***************************************\n")
@@ -74,7 +74,7 @@ class TestRiego(unittest.TestCase):
         estacion = 0    # 8: Invierno
         
         print("Dia: ", dias)
-        print("***************************************")
+        print("***************************************\n")
         estado = riego.control_riego(self, tierra, dias, agua, estacion)
         print("\n", estado, "\n")
         print("***************************************\n")
@@ -91,7 +91,7 @@ class TestRiego(unittest.TestCase):
         
         
         print("Dia: ", dias)
-        print("***************************************")
+        print("***************************************\n")
         estado = riego.control_riego(self, tierra, dias, agua, estacion)
         print("\n", estado, "\n")
         print("***************************************\n")
@@ -107,7 +107,7 @@ class TestRiego(unittest.TestCase):
         estacion = 0    # 8: Invierno
         
         print("Dia: ", dias)
-        print("***************************************")
+        print("***************************************\n")
         estado = riego.control_riego(self, tierra, dias, agua, estacion)
         print("\n", estado, "\n")
         print("***************************************\n")
