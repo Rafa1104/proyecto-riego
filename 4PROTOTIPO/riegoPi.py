@@ -112,6 +112,16 @@ class Riego:
             GPIO.output(32, GPIO.LOW)
             print("\n" + "***************************")
             print("\n")
+            
+        if dias == 3:
+            #GPIO.output(32, GPIO.HIGH)
+            print("-Dia 3, la bomba siempre se activa")
+            #GPIO.output(32, GPIO.HIGH)
+            estado = "BOMBA ACTIVADA"
+            if agua == 1: # Reserva vacia
+                  print("-LA BOMBA NO PUEDE TRABAJAR SI EL DEPOSITO ESTA VACIO-")
+                  #GPIO.output(32, GPIO.LOW)
+                  estado = "BOMBA DESACTIVADA"
 
         return(estado)
 

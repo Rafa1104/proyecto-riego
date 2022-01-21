@@ -126,15 +126,15 @@ class Riego:
 riego = Riego()
 dias = 0
 
-for i in range(2):
-  dias +=1
-
-##  tierra, agua, estacion = riego.lectura_sensor()
+##for i in range(2):
+##  dias +=1
+##
 ##  print("Dia: ", dias)
 ##  print("***************************************")
+##  tierra, agua, estacion = riego.lectura_sensor()
 ##  print("\n", riego.control_riego(tierra, dias, agua, estacion), "\n")
 ##  print("***************************************\n")
-  if dias == 3:
-    dias = 0
-  time.sleep(3)
+##  if dias == 3:
+##    dias = 0
+##  time.sleep(3)
 
