@@ -20,8 +20,8 @@ class TestRiego(unittest.TestCase):
     def test_caso_1 (self):
         estado = ""
                         # CASO 1: 1-4-5-8 [dias:1]
-        tierra = 1      # 1: Seca
-        dias = 1        # 4: Dias < 3 -> Dias:1
+        tierra = 0      # 1: Seca
+        dias = 0        # 4: Dias < 3 -> Dias:1
         agua = 0        # 5: Con agua
         estacion = 0    # 8: Invierno
 
@@ -31,7 +31,7 @@ class TestRiego(unittest.TestCase):
         print("\n", fechaActualFormato, "\n", estado, "\n")
         print("***************************************\n")
         
-        self.assertEqual(estado, "BOMBA ACTIVADA")
+        self.assertNotEqual(estado, "BOMBA ACTIVADA")
         self.assertTrue(fechaActualFormato)
 
     def test_caso_2 (self):
