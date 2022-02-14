@@ -2,7 +2,6 @@
 from email import header
 #import time
 from datetime import date, datetime
-import locale
 #import os
 import csv
 
@@ -22,10 +21,9 @@ class Riego:
         # r = estacion
         # d = dia noche
         # v = agua
-        locale.setlocale(locale.LC_TIME, 'es_ES.UTF-8')
 
         dia_actual = date.today()
-        dia_actual_formato = date.strftime(dia_actual, '%d de %B de %Y')
+        dia_actual_formato = date.strftime(dia_actual, '%d-%m-%Y')
 
         hora_actual = datetime.now()
         hora_actual_formato = datetime.strftime(hora_actual, '%I:%M:%S %p')
