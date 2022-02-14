@@ -1,7 +1,10 @@
 #import RPi.GPIO as GPIO
-import time
+from email import header
+#import time
 from datetime import date, datetime
-import os
+import locale
+#import os
+import csv
 
 
 class Riego:  
@@ -19,9 +22,16 @@ class Riego:
         # r = estacion
         # d = dia noche
         # v = agua
+        locale.setlocale(locale.LC_TIME, 'es_ES.UTF-8')
+
+        dia_actual = date.today()
+        dia_actual_formato = date.strftime(dia_actual, '%d de %B de %Y')
+
+        hora_actual = datetime.now()
+        hora_actual_formato = datetime.strftime(hora_actual, '%I:%M:%S %p')
         
-        fechaActual = datetime.now()
-        fechaActualFormato = datetime.strftime(fechaActual, '%d/%m/%Y %H:%M:%S')
+        # fechaActual = datetime.now()
+        # fechaActualFormato = datetime.strftime(fechaActual, '%d/%m/%Y %H:%M:%S')
 
         estado = ""
         
@@ -80,7 +90,7 @@ class Riego:
                   #GPIO.output(32, GPIO.LOW)
                   estado = "BOMBA DESACTIVADA"
 
-        return(fechaActualFormato, estado)
+        return(hora_actual_formato, dia_actual_formato, estado) #  fechaActualFormato
 
 
 
@@ -89,6 +99,8 @@ riego = Riego()
 
 
 dias = 0
+header = ['Dia', 'Hora', 'Tierra', 'Agua', 'Estación', 'Estado']
+data = []
 
 ##for i in range(3): dias +=1
 ##
@@ -103,6 +115,17 @@ dias = 0
 ##  time.sleep(3)
 
 tierra, agua, estacion = riego.lectura_sensor()
-fechaActualFormato, estado = riego.control_riego(tierra, dias, agua, estacion)
+hora_actual_formato, dia_actual_formato, estado = riego.control_riego(tierra, dias, agua, estacion)
 
-data = {'Hora': fechaActualFormato, 'Tierra': tierra, 'Agua': agua, 'Estacion': estacion, 'Estado': estado}
+data.append(dia_actual_formato)
+data.append(hora_actual_formato)
+data.append(tierra)
+data.append(agua)
+data.append(estacion)
+data.append(estado)
+
+with open('data_riego.csv', 'a', encoding='UTF8', newline='') as file:
+    writer = csv.writer(file)
+
+    writer.writerow(header)
+    writer.writerow(data)

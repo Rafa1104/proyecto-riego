@@ -18,5 +18,4 @@ plt.pie(work, labels = names, colors = colors, startangle = 90,
         shadow = True, radius = 1.2, autopct = '%1.1f%%') 
 plt.show()
 
-
-# %%
+#%%
