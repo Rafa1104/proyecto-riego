@@ -23,14 +23,22 @@ message['Subject'] = 'A test mail sent by Python. It has an attachment.'
 #The subject line
 #The body and the attachments for the mail
 message.attach(MIMEText(mail_content, 'plain'))
-attach_file_name = 'Historial.pdf'
-attach_file = open(attach_file_name, 'rb') # Open the file as binary mode
-payload = MIMEBase('application', 'octate-stream')
-payload.set_payload((attach_file).read())
-encoders.encode_base64(payload) #encode the attachment
+
+# PDF
+pdfname = 'Historial.pdf'
+
+# Open the file as binary mode
+bynary_pdf=open('Historial.pdf', 'rb')
+payload = MIMEBase('application', 'octate-stream', Name=pdfname)
+payload.set_payload((bynary_pdf).read())
+
+#encode the attachment
+encoders.encode_base64(payload)
+
 #add payload header with filename
-payload.add_header('Content-Decomposition', 'attachment', filename=attach_file_name)
+payload.add_header('Content-Decomposition', 'attachment', filename=pdfname)
 message.attach(payload)
+
 #Create SMTP session for sending the mail
 session = smtplib.SMTP('smtp.gmail.com', 587) #use gmail with port
 session.starttls() #enable security
