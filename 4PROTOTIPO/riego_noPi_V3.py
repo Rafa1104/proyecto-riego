@@ -122,7 +122,7 @@ tierra, agua, estacion = riego.lectura_sensor()
 # --------------------------------------------------------
 dias = 0
 header = ['Dia', 'Hora', 'Tierra', 'Agua', 'Estación', 'Estado']
-with open('data_riego.csv', 'a', encoding='UTF8', newline='') as file:
+with open('data_riego.csv', 'w', encoding='UTF8', newline='') as file:
     writer = csv.writer(file, lineterminator='\n')
 
     writer.writerow(header)
