@@ -5,45 +5,65 @@ from email.mime.base import MIMEBase
 from email import encoders
 
 
-mail_content = '''Hello,
-This is a test mail.
-In this mail we are sending some attachments.
-The mail is sent using Python SMTP library.
-Thank You
-'''
-#The mail addresses and password
-sender_address = 'rafael.fzurita@gmail.com'
-sender_pass = 'armando2001'
-receiver_address = 'armando.zuritaa@gmail.com'
-#Setup the MIME
-message = MIMEMultipart()
-message['From'] = sender_address
-message['To'] = receiver_address
-message['Subject'] = 'A test mail sent by Python. It has an attachment.'
-#The subject line
-#The body and the attachments for the mail
-message.attach(MIMEText(mail_content, 'plain'))
+def sendmail(file):
 
-# PDF
-pdfname = 'Historial.pdf'
+    contenido ='''
+    Saludos,
 
-# Open the file as binary mode
-bynary_pdf=open('Historial.pdf', 'rb')
-payload = MIMEBase('application', 'octate-stream', Name=pdfname)
-payload.set_payload((bynary_pdf).read())
+    Este es un correo por parte del sistema de riego automatico Green Drops.
 
-#encode the attachment
-encoders.encode_base64(payload)
+    Adjunto se encuentra el Historial de Riego.
 
-#add payload header with filename
-payload.add_header('Content-Decomposition', 'attachment', filename=pdfname)
-message.attach(payload)
 
-#Create SMTP session for sending the mail
-session = smtplib.SMTP('smtp.gmail.com', 587) #use gmail with port
-session.starttls() #enable security
-session.login(sender_address, sender_pass) #login with mail_id and password
-text = message.as_string()
-session.sendmail(sender_address, receiver_address, text)
-session.quit()
-print('Mail Sent')
+
+
+
+    Atentamente
+    Green Drops - Sistema de Riego automatico'''
+
+    # The mail addresses and password
+    sender_address = 'rafael.fzurita@gmail.com'
+    sender_pass = 'armando2001'
+    receiver_address = 'armando.zuritaa@gmail.com'
+
+    # Setup the MIME
+    message = MIMEMultipart()
+    message['From'] = sender_address
+    message['To'] = receiver_address
+    message['Subject'] = 'Historial de Riego'
+
+    # The body and the attachments for the mail
+    message.attach(MIMEText(contenido, 'plain'))
+
+    # PDF
+    pdfname = file
+
+    # Open the file as binary mode
+    bynary_pdf = open('Historial.pdf', 'rb')
+    payload = MIMEBase('application', 'octate-stream', Name=pdfname)
+    payload.set_payload((bynary_pdf).read())
+
+    # encode the attachment
+    encoders.encode_base64(payload)
+
+    # add payload header with filename
+    payload.add_header('Content-Decomposition', 'attachment', filename=pdfname)
+    message.attach(payload)
+
+    # Create SMTP session for sending the mail
+    session = smtplib.SMTP('smtp.gmail.com', 587)  # use gmail with port
+    session.starttls()  # enable security
+    session.login(sender_address, sender_pass)  # login with mail_id and password
+    text = message.as_string()
+    session.sendmail(sender_address, receiver_address, text)
+    session.quit()
+
+    print('Correo Enviado')
+
+def run():
+
+    file = 'Historial.pdf'
+    sendmail(file)
+
+if __name__ == '__main__':
+    run()
