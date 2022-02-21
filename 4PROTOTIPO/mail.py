@@ -6,7 +6,7 @@ from email import encoders
 
 class Notificacion:
 
-    def sendmail(self, file):
+    def sendmail(file):
 
         contenido ='''Saludos,
 
@@ -36,7 +36,7 @@ class Notificacion:
         pdfname = file
 
         # Open the file as binary mode
-        bynary_pdf = open('Historial.pdf', 'rb')
+        bynary_pdf = open(pdfname, 'rb')
         payload = MIMEBase('application', 'octate-stream', Name=pdfname)
         payload.set_payload((bynary_pdf).read())
 
