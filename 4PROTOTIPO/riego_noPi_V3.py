@@ -3,7 +3,7 @@ from email import header
 #import time
 from datetime import date, datetime
 #import os
-import csv
+
 import pandas as pd
 import pdfkit
 from fpdf import FPDF
@@ -96,47 +96,16 @@ class Riego:
 riego = Riego()
 
 
-dias = 0
-header = ['Dia', 'Hora', 'Tierra', 'Agua', 'Estación', 'Estado']
-data = []
-
 ##for i in range(3): dias +=1
 ##
 ##  print("Dia: ", dias)
 # print("***************************************")
-##  tierra, agua, estacion = riego.lectura_sensor()
 ##  fechaActualFormato, estado = riego.control_riego(tierra, dias, agua, estacion)
 ##  print("\n", fechaActualFormato, "\n", estado , "\n")
 # print("***************************************\n")
 # if dias == 3:
 ##    dias = 0
 # time.sleep(3)
-
-tierra, agua, estacion = riego.lectura_sensor()
-hora_actual_formato, dia_actual_formato, estado = riego.control_riego(
-    tierra, dias, agua, estacion)
-
-data.append(dia_actual_formato)
-data.append(hora_actual_formato)
-data.append(tierra)
-data.append(agua)
-data.append(estacion)
-data.append(estado)
-
-# with open('data_riego.csv', 'a', encoding='UTF8', newline='') as file:
-#     writer = csv.writer(file)
-
-#     writer.writerow(header)
-#     writer.writerow(data)
-#     writer.writerow(data)
-
-
-CSV = pd.read_csv('data_riego.csv')
-CSV.to_html('data_riego.html')
-
-path_wkhtmltopdf = r'C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe'
-config = pdfkit.configuration(wkhtmltopdf=path_wkhtmltopdf)
-pdfkit.from_file('data_riego.html', 'Historial.pdf', configuration=config)
 
 
 
