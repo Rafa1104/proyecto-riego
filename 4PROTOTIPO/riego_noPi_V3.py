@@ -123,16 +123,18 @@ tierra, agua, estacion = riego.lectura_sensor()
 dias = 0
 header = ['Dia', 'Hora', 'Tierra', 'Agua', 'Estación', 'Estado']
 with open('data_riego.csv', 'a', encoding='UTF8', newline='') as file:
-    writer = csv.writer(file)
+    writer = csv.writer(file, lineterminator='\n')
 
     writer.writerow(header)
     file.close()
 
-data = []
+
+all_data = []
 
 
 for i in range(3):
     dias += 1
+    data = []
 
     print("Dia: ", dias)
     print("***************************************")
@@ -153,10 +155,10 @@ for i in range(3):
     data.append(agua_Status)
     data.append(estacion_status)
     data.append(estado)
+    all_data.append(data)
 
-    with open('data_riego.csv', 'a', encoding='UTF8', newline='') as file:
-        writer = csv.writer(file)
-
+    with open('data_riego.csv', 'a', encoding='UTF8', newline='\n') as file:
+        writer = csv.writer(file, lineterminator='\n')
         writer.writerow(data)
         file.close()
 
