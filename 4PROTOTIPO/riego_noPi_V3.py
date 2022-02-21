@@ -1,7 +1,8 @@
 #import RPi.GPIO as GPIO
 from email import header
-#import time
-from datetime import date, datetime
+import time
+import csv
+from datetime import  datetime, timedelta
 #import os
 
 import pandas as pd
@@ -25,23 +26,27 @@ class Riego:
         # d = dia noche
         # v = agua
 
-        dia_actual = date.today()
-        dia_actual_formato = date.strftime(dia_actual, '%d-%m-%Y')
+        dia_actual = datetime.today()
+        dia_actual_formato = datetime.strftime(dia_actual, '%d-%m-%Y')
 
         hora_actual = datetime.now()
         hora_actual_formato = datetime.strftime(hora_actual, '%I:%M:%S %p')
 
-        # fechaActual = datetime.now()
-        # fechaActualFormato = datetime.strftime(fechaActual, '%d/%m/%Y %H:%M:%S')
 
         estado = ""
+        tierra_Status = ""
+        agua_Status = ""
+
 
         if tierra == 1:  # seca
+            tierra_Status = "Seca"
             if estacion == 1:  # Verano
                 if agua == 0:  # lleno
+                    agua_Status = "Con Agua"
                     #GPIO.output(32, GPIO.HIGH)
                     estado = "BOMBA ACTIVADA"
                 else:
+                    agua_Status = "Sin Agua"
 
                     #GPIO.output(32, GPIO.LOW)
                     print("-LA BOMBA NO PUEDE TRABAJAR SI EL DEPOSITO ESTA VACIO-")
@@ -49,6 +54,7 @@ class Riego:
             else:
 
                 if agua == 1:  # Reserva vacia
+                    agua_Status = "Sin Agua"
                     print("-LA BOMBA NO PUEDE TRABAJAR SI EL DEPOSITO ESTA VACIO-")
                     estado = "BOMBA DESACTIVADA"
                     #GPIO.output(32, GPIO.LOW)
@@ -56,25 +62,29 @@ class Riego:
                 else:
 
                     if agua == 0:  # lleno
+                        agua_Status = "Con Agua"
                         #GPIO.output(32, GPIO.HIGH)
                         estado = "BOMBA ACTIVADA"
 
                     else:
-                        print(
-                            "-LA BOMBA NO PUEDE TRABAJAR SI EL DEPOSITO ESTA VACIO-")
+                        agua_Status = "Sin Agua"
+                        print("-LA BOMBA NO PUEDE TRABAJAR SI EL DEPOSITO ESTA VACIO-")
                         estado = "BOMBA DESACTIVADA"
                         #GPIO.output(32, GPIO.LOW)
 
         else:
+            tierra_Status = "Humeda"
 
             print("-NO NECESITA RIEGO-")
             if estacion == 1:  # Verano
                 if agua == 1:  # Reserva vacia
+                    agua_Status = "Sin Agua"
                     print("-LA BOMBA NO PUEDE TRABAJAR SI EL DEPOSITO ESTA VACIO-")
 
             else:
 
                 if agua == 1:  # Reserva vacia
+                    agua_Status = "Sin Agua"
                     print("-LA BOMBA NO PUEDE TRABAJAR SI EL DEPOSITO ESTA VACIO-")
             estado = "BOMBA DESACTIVADA"
             #GPIO.output(32, GPIO.LOW)
@@ -85,27 +95,52 @@ class Riego:
             #GPIO.output(32, GPIO.HIGH)
             estado = "BOMBA ACTIVADA"
             if agua == 1:  # Reserva vacia
+                agua_Status = "Sin Agua"
                 print("-LA BOMBA NO PUEDE TRABAJAR SI EL DEPOSITO ESTA VACIO-")
                 #GPIO.output(32, GPIO.LOW)
                 estado = "BOMBA DESACTIVADA"
 
-        # fechaActualFormato
-        return(hora_actual_formato, dia_actual_formato, estado)
+        return(dia_actual, dia_actual_formato, hora_actual_formato, tierra_Status, agua_Status, estado)
 
 
 riego = Riego()
+tierra, agua, estacion = riego.lectura_sensor()
+# --------------------------------------------------------
+dias = 0
+header = ['Dia', 'Hora', 'Tierra', 'Agua', 'Estación', 'Estado']
+data = []
+
+for i in range(3):
+    dias +=1
+
+    print("Dia: ", dias)
+    print("***************************************")
+    dia_actual, dia_actual_formato, hora_actual_formato, tierra_Status, agua_Status, estado = riego.control_riego(tierra, dias, agua, estacion)
+
+    dia_actual = datetime.timedelta(days=1)
+    print("\nFecha: ", dia_actual_formato, " - Hora: ", hora_actual_formato, "\nEstado :", estado , "\n")
+    print("***************************************\n")
+    if dias == 3:
+        dias = 0
 
 
-##for i in range(3): dias +=1
-##
-##  print("Dia: ", dias)
-# print("***************************************")
-##  fechaActualFormato, estado = riego.control_riego(tierra, dias, agua, estacion)
-##  print("\n", fechaActualFormato, "\n", estado , "\n")
-# print("***************************************\n")
-# if dias == 3:
-##    dias = 0
-# time.sleep(3)
+
+
+data.append(dia_actual_formato)
+data.append(hora_actual_formato)
+data.append(tierra_Status)
+data.append(agua_Status)
+data.append(estacion)
+data.append(estado)
+
+# --------------------------------------------------------
+
+with open('data_riego.csv', 'a', encoding='UTF8', newline='') as file:
+    writer = csv.writer(file)
+
+    writer.writerow(header)
+    writer.writerow(data)
+    writer.writerow(data)
 
 
 
