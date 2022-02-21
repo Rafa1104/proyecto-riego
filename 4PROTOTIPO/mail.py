@@ -57,11 +57,11 @@ class Notificacion:
 
         print('Correo Enviado')
 
-def run():
-    notificacion = Notificacion()
+# def run():
+#     notificacion = Notificacion()
 
-    file = 'Historial.pdf'
-    notificacion.sendmail(file)
+#     file = 'Historial.pdf'
+#     notificacion.sendmail(file)
 
-if __name__ == '__main__':
-    run()
+# if __name__ == '__main__':
+#     run()
