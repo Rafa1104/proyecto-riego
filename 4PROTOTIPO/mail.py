@@ -7,14 +7,10 @@ from email import encoders
 
 def sendmail(file):
 
-    contenido ='''
-    Saludos,
+    contenido ='''Saludos,
 
     Este es un correo por parte del sistema de riego automatico Green Drops.
-
     Adjunto se encuentra el Historial de Riego.
-
-
 
 
 
