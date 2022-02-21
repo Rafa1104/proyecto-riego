@@ -7,7 +7,10 @@ from email import encoders
 class Notificacion:
 
     def sendmail(file):
-        print("Mensaje:\n", "Enviando Correo...")
+        print('''
+Mensaje:
+
+        >> ENVIANDO CORREO... <<''')
 
         contenido ='''Saludos,
 
@@ -57,9 +60,9 @@ class Notificacion:
         session.quit()
 
         mensaje = '''
-                Mensaje:
+Mensaje:
 
-            >> CORREO ENVIADO <<'''
+        >> CORREO ENVIADO <<'''
         print("\n", mensaje)
 
 # def run():
